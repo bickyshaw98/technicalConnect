@@ -39,8 +39,7 @@ jobs:
       - name: 'What-if'
         working-directory: '${{github.workspace}}/actions/bicep'
         run: |
-          az deployment group create --what-if --resource-group demo-rg --template-file './storage.bicep' --parameters @parameters.json
-          sleep 200
+          timeout 2s az deployment group create --what-if --resource-group demo-rg --template-file './storage.bicep' --parameters @parameters.json
   dev_deployment:
     name: dev deployment 
     # The type of runner that the job will run on
