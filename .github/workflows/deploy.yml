@@ -24,6 +24,7 @@ jobs:
     name: bicep build 
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    timeout-minutes: 0.08  # 5 seconds is equivalent to 0.08 minutes (5 / 60)
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -35,7 +36,7 @@ jobs:
         with:
             creds: ${{ secrets.AZURE_SPN_CREDENTIAL }}
 
-      - name: 'deploy storage account bicep'
+      - name: 'What-if'
         working-directory: '${{github.workspace}}/actions/bicep'
         run: |
           az deployment group create --what-if --resource-group demo-rg --template-file './storage.bicep' --parameters @parameters.json
